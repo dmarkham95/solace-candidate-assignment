@@ -8,6 +8,13 @@
       "when": 1739830255759,
       "tag": "0000_init",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1739847612968,
+      "tag": "0001_blushing_raider",
+      "breakpoints": true
     }
   ]
 }

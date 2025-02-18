@@ -1,8 +1,8 @@
-import { Request, Response, NextFunction } from "express";
-import logger from "../config/logger";
-import { ApiError } from "@/utils/api-error";
-import { ZodError } from "zod";
-import { ErrorResponse } from "@/types/error.types";
+import { Request, Response, NextFunction } from 'express';
+import logger from '../config/logger';
+import { ApiError } from '../utils/api-error';
+import { ZodError } from 'zod';
+import { ErrorResponse } from '../types/error.types';
 
 export interface AppError extends Error {
   statusCode?: number;
@@ -14,12 +14,12 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  const isDevelopment = process.env.NODE_ENV === "development";
+  const isDevelopment = process.env.NODE_ENV === 'development';
   logger.error(error);
 
   let statusCode = 500;
   const response: ErrorResponse = {
-    message: "Internal Server Error",
+    message: 'Internal Server Error',
   };
 
   if (error instanceof ApiError) {
@@ -30,7 +30,7 @@ export const errorHandler = (
     }
   } else if (error instanceof ZodError) {
     statusCode = 400;
-    response.message = "Validation Error";
+    response.message = 'Validation Error';
     response.errors = error.errors;
   }
 
