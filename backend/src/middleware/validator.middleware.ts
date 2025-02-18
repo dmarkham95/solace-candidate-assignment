@@ -14,8 +14,9 @@ export const validate =
       return next();
     } catch (error) {
       if (error instanceof z.ZodError) {
-        throw ApiError.BadRequest('Validation failed', error.errors);
+        next(ApiError.BadRequest('Validation failed', error.errors));
       }
-      throw error;
+
+      next(error);
     }
   };

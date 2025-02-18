@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { requestLogger } from './middleware/requestLogger.middleware';
+import { requestLogger } from './middleware/request-logger.middleware';
 import { errorHandler } from './middleware/error.middleware';
 import routes from './routes';
 
