@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { useConfig } from '../ConfigProvider'
 import { useForm } from '../Form/context'
 import { useInputGroup } from '../InputGroup/context'
-import { CONTROL_SIZES } from '../utils/constants'
+import { CONTROL_SIZES } from '@/utils/constants'
 import type { CommonProps, TypeAttributes } from '@/@types/common'
 
 export interface AddonProps extends CommonProps {
