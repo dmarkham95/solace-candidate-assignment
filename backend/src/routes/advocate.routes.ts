@@ -10,6 +10,8 @@ router
   .get(advocateController.getAdvocates)
   .post(validate(createAdvocateSchema), advocateController.createAdvocate);
 
+router.route('/statistic').get(advocateController.getAdvocatesStatistic);
+
 router
   .route('/:id')
   .get(advocateController.getAdvocateById)

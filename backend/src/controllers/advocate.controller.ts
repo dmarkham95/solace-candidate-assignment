@@ -90,6 +90,15 @@ export class AdvocateController {
       next(error as Error);
     }
   }
+
+  async getAdvocatesStatistic(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await advocateService.getAdvocatesStatistic();
+      res.status(200).json(result);
+    } catch (error) {
+      next(error as Error);
+    }
+  }
 }
 
 export const advocateController = new AdvocateController();
