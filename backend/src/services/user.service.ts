@@ -1,8 +1,8 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../db';
 import logger from '../config/logger';
-import { NewUser } from '@/models/user.model';
-import { users } from '@/db/schema/users';
+import { NewUser } from '../models/user.model';
+import { users } from '../db/schema/users';
 
 export class UserService {
   async createUser(data: NewUser) {
@@ -24,12 +24,9 @@ export class UserService {
     }
   }
 
-  async getUserById(id: bigint) {
+  async getUserById(id: number) {
     try {
-      const [user] = await db
-        .select()
-        .from(users)
-        .where(eq(users.id, id));
+      const [user] = await db.select().from(users).where(eq(users.id, id));
       return user;
     } catch (error) {
       logger.error(`Error fetching user ${id}:`, error);
@@ -37,7 +34,7 @@ export class UserService {
     }
   }
 
-  async updateUser(id: bigint, data: Partial<NewUser>) {
+  async updateUser(id: number, data: Partial<NewUser>) {
     try {
       const [updatedUser] = await db
         .update(users)
@@ -51,12 +48,9 @@ export class UserService {
     }
   }
 
-  async deleteUser(id: bigint) {
+  async deleteUser(id: number) {
     try {
-      const [deletedUser] = await db
-        .delete(users)
-        .where(eq(users.id, id))
-        .returning();
+      const [deletedUser] = await db.delete(users).where(eq(users.id, id)).returning();
       return deletedUser;
     } catch (error) {
       logger.error(`Error deleting user ${id}:`, error);
