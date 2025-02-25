@@ -1,11 +1,12 @@
-import { and, eq, gte, like, lte, sql, SQL } from 'drizzle-orm';
+import { and, count, eq, gte, like, lte, sql, SQL, sum } from 'drizzle-orm';
 import { db } from '../db';
 import logger from '../config/logger';
-import { Advocate, AdvocateWithRelations, NewAdvocate } from '../models/advocate.model';
+import { Advocate, NewAdvocate } from '../models/advocate.model';
 import { advocates } from '../db/schema/advocates';
 import { AdvocateFilters } from '../types/advocate-filters.type';
 import { PaginationParams } from '../types/pagination-params.type';
-import { PaginatedResponse } from 'src/types/paginated-response.type';
+import { PaginatedResponse } from '../types/paginated-response.type';
+import { specialties } from '../db/schema/specialties';
 
 export class AdvocateService {
   async createAdvocate(data: NewAdvocate) {
@@ -149,6 +150,25 @@ export class AdvocateService {
       return deletedAdvocate;
     } catch (error) {
       logger.error(`Error deleting advocate ${id}:`, error);
+      throw error;
+    }
+  }
+
+  async getAdvocatesStatistic() {
+    try {
+      const totalYearsOfExperience = await db
+        .select({ value: sum(advocates.yearsOfExperience) })
+        .from(advocates);
+      const totalAdvocates = await db.select({ value: count(advocates.id) }).from(advocates);
+      const totalSpecialties = await db.select({ value: count(specialties.id) }).from(specialties);
+
+      return {
+        totalYearsOfExperience: totalYearsOfExperience[0].value,
+        totalAdvocates: totalAdvocates[0].value,
+        totalSpecialties: totalSpecialties[0].value,
+      };
+    } catch (error) {
+      logger.error(`Error fetching advocate statistic:`, error);
       throw error;
     }
   }
