@@ -1,0 +1,13 @@
+# ESLint
+.eslintcache
+
+# Prettier
+.prettierignore
+
+# dependencies
+/node_modules
+
+# production
+/dist
+
+/.vscode
