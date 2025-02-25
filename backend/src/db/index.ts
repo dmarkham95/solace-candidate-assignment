@@ -1,3 +1,4 @@
+import schema from './schema';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import logger from '../config/logger';
@@ -11,4 +12,5 @@ pool.on('error', (err) => {
   process.exit(-1);
 });
 
-export const db = drizzle(pool);
+// export const db = drizzle(pool);
+export const db = drizzle({ client: pool, schema });

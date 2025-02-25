@@ -12,6 +12,7 @@ const advocates = pgTable('advocates', {
   yearsOfExperience: integer('years_of_experience').notNull(),
   phoneNumber: bigint('phone_number', { mode: 'number' }).notNull(),
   createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
 });
 
 export const advocatesRelations = relations(advocates, ({ many }) => ({

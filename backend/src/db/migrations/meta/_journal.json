@@ -15,6 +15,13 @@
       "when": 1739847612968,
       "tag": "0001_blushing_raider",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1739858968311,
+      "tag": "0002_lazy_invaders",
+      "breakpoints": true
     }
   ]
 }
